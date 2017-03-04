@@ -4,9 +4,9 @@
   "description": "Generate .docx files from JS",
   "main": "dist/jsdocx.js",
   "scripts": {
-    "test": "mocha",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "prepublish": "npm run build"
+    "test": "npm run build && mocha --compilers js:babel-core/register",
+    "prepublish": "npm run test"
   },
   "repository": {
     "type": "git",
