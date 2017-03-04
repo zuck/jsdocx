@@ -1,0 +1,28 @@
+{
+  "name": "jsdocx",
+  "version": "0.0.1",
+  "description": "Generate .docx files from JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuck/jsdocx.git"
+  },
+  "keywords": [
+    "js",
+    "docx",
+    "office",
+    "convert"
+  ],
+  "author": "Emanuele Bertoldi <emanuele.bertoldi@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zuck/jsdocx/issues"
+  },
+  "homepage": "https://github.com/zuck/jsdocx#readme",
+  "devDependencies": {
+    "mocha": "^3.1.2"
+  }
+}
