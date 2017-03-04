@@ -4,8 +4,17 @@
 
 ## Install
 
-```
+```bash
 npm install jsdocx
+```
+
+## Build
+
+```bash
+$ git clone https://github.com/zuck/jsdocx.git
+$ cd jsdocx
+$ npm install
+$ npm run build
 ```
 
 ## License
