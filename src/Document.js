@@ -1,5 +1,6 @@
 import JSZip from 'jszip'
 import File from './File'
+import Paragraph from './Paragraph'
 
 export default class {
   constructor() {
@@ -60,6 +61,10 @@ export default class {
     }
   }
 
+  root () {
+    return this.files['word/document.xml']
+  }
+
   addFile (filename, jsonContent) {
     let f = new File(jsonContent)
     this.files[filename] = f
@@ -67,7 +72,9 @@ export default class {
   }
 
   addParagraph () {
-
+    let p = new Paragraph({ 'w:p': [] })
+    this.root().contents.push(p)
+    return p
   }
 
   toZip () {

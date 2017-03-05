@@ -58,6 +58,22 @@ describe('#SerializeMixin', () => {
         'b': 'Bar'
       })
     })
+    it('should ignore content if hook is null', () => {
+      let p = new jsdocx.SerializeMixin({
+        'a': 'Foo',
+        b: 'Bar',
+        c: {}
+      })
+      let m = new jsdocx.SerializeMixin({
+        d: 1
+      })
+      p.contents.push(m)
+      assert.deepEqual(p.toJson(), {
+        'a': 'Foo',
+        'b': 'Bar',
+        'c': {}
+      })
+    })
     it('should insert content at given hook', () => {
       let p = new jsdocx.SerializeMixin({
         'a': 'Foo',
