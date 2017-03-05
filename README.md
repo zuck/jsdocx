@@ -17,6 +17,18 @@ $ npm install
 $ npm run build
 ```
 
+## How to use
+
+```js
+import jsdocx from 'jsdocx'
+
+let doc = new jsdocx.Document()
+doc.addParagraph().addRun().addText('Hello World!')
+doc.generate().then((content) => {
+  // e.g. saveAs(content, 'hello.docx')
+})
+```
+
 ## License
 
 The MIT License (MIT)
