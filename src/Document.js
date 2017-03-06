@@ -72,7 +72,7 @@ export default class {
   }
 
   addParagraph () {
-    let p = new Paragraph({ 'w:p': [] })
+    let p = new Paragraph()
     this.root().contents.push(p)
     return p
   }

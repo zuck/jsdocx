@@ -29,6 +29,13 @@ describe('#Document', () => {
       // assert.equal(typeof doc.files['Content_Types.xml'], 'object')
     })
   })
+  describe('#addParagraph', () => {
+    it('should add a valid paragraph', () => {
+      let doc = new jsdocx.Document()
+      let p = doc.addParagraph()
+      assert.equal(p instanceof jsdocx.Paragraph, true)
+    })
+  })
   describe('#toZip', () => {
     it('should return a zip archive', () => {
       let doc = new jsdocx.Document()

@@ -16,6 +16,13 @@ describe('#Paragraph', () => {
       assert.equal(p.contentHook, '["w:p"]')
     })
   })
+  describe('#addFormat', () => {
+    it('should add a valid format', () => {
+      let p = new jsdocx.Paragraph()
+      let f = p.addFormat()
+      assert.equal(f instanceof jsdocx.ParagraphFormat, true)
+    })
+  })
   describe('#toJson', () => {
     it('should insert contents inside "w:p" tag', () => {
       let p = new jsdocx.Paragraph()
