@@ -6,7 +6,7 @@ describe('#Run', () => {
     it('should be equal to "w:r"', () => {
       let r = new jsdocx.Run()
       assert.equal(r.hasOwnProperty('src'), true)
-      assert.deepEqual(r.src, { 'w:r': [] })
+      assert.deepEqual(r.src, { 'w:r': {} })
     })
   })
   describe('#contentHook', () => {
@@ -21,7 +21,7 @@ describe('#Run', () => {
       let r = new jsdocx.Run()
       let m = new jsdocx.Element({ a: 2 })
       r.contents.push(m)
-      assert.deepEqual(r.toJson(), { 'w:r': [{ 'a': 2 }] })
+      assert.deepEqual(r.toJson(), { 'w:r': { 'a': 2 } })
     })
   })
   describe('#toXml', () => {

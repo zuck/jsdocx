@@ -227,6 +227,35 @@ describe('#Element', () => {
         }
       })
     })
+    it('should merge more contents at given hook when similar', () => {
+      let p = new jsdocx.Element({
+        'a': 'Foo',
+        b: 'Bar',
+        c: {
+          d: {
+          }
+        }
+      }, '.c.d')
+      let e1 = new jsdocx.Element({
+        e: {
+          f: 1
+        }
+      })
+      let e2 = new jsdocx.Element({
+        'e': 2
+      })
+      p.contents.push(e1)
+      p.contents.push(e2)
+      assert.deepEqual(p.toJson(), {
+        'a': 'Foo',
+        'b': 'Bar',
+        'c': {
+          'd': {
+            'e': [{ 'f': 1 }, 2]
+          }
+        }
+      })
+    })
     it('should insert contents at given hook when string keys are used', () => {
       let p = new jsdocx.Element({
         'a': 'Foo',
@@ -292,21 +321,30 @@ describe('#Element', () => {
       let e = new jsdocx.Element({
         a: 'Foo',
         b: 'Bar',
-        'c': [],
-        d: 1
+        'c': [{
+          d: 1
+        }],
+        e: 2
       }, '.c')
       e.finalize = function (contents) {
         contents.push(new jsdocx.Element({
-          e: 2
+          f: 3
+        }))
+        contents.unshift(new jsdocx.Element({
+          'g': 4
         }))
       }
       assert.deepEqual(e.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
         'c': [{
-          'e': 2
+          'd': 1
+        }, {
+          'g': 4
+        }, {
+          'f': 3
         }],
-        'd': 1
+        'e': 2
       })
       assert.equal(e.contents.length, 0)
     })

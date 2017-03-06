@@ -6,7 +6,7 @@ describe('#Paragraph', () => {
     it('should be equal to "w:p"', () => {
       let p = new jsdocx.Paragraph()
       assert.equal(p.hasOwnProperty('src'), true)
-      assert.deepEqual(p.src, { 'w:p': [] })
+      assert.deepEqual(p.src, { 'w:p': {} })
     })
   })
   describe('#contentHook', () => {
@@ -21,7 +21,7 @@ describe('#Paragraph', () => {
       let p = new jsdocx.Paragraph()
       let m = new jsdocx.Element({ a: 2 })
       p.contents.push(m)
-      assert.deepEqual(p.toJson(), { 'w:p': [{ 'a': 2 }] })
+      assert.deepEqual(p.toJson(), { 'w:p': { 'a': 2 } })
     })
   })
   describe('#toXml', () => {
@@ -29,6 +29,13 @@ describe('#Paragraph', () => {
       let p = new jsdocx.Paragraph()
       p.addRun().addText('Hello World!')
       assert.equal(p.toXml(), '<w:p><w:r><w:t xml:space="preserve">Hello World!</w:t></w:r></w:p>')
+    })
+    it('should render with format', () => {
+      let p = new jsdocx.Paragraph()
+      p.addRun().addText('Hello World!')
+      // Format will be injected before any other content.
+      p.addFormat().addTabs().addTab()
+      assert.equal(p.toXml(), '<w:p><w:pPr><w:tabs><w:tab/></w:tabs></w:pPr><w:r><w:t xml:space="preserve">Hello World!</w:t></w:r></w:p>')
     })
   })
 })

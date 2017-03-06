@@ -27,11 +27,22 @@ export default class {
       let hook = eval('src' + this.contentHook)
       contents.forEach((c) => {
         if (c && c.toJson) {
+          let json = c.toJson()
           if (hook instanceof Array) {
-            hook.push(c.toJson())
+            hook.push(json)
           }
           else {
-            Object.assign(hook, c.toJson())
+            Object.keys(json).forEach((key) => {
+              if (!key in hook || !hook[key]) {
+                hook[key] = json[key]
+              }
+              else if (!(hook[key] instanceof Array)) {
+                hook[key] = [hook[key], json[key]]
+              }
+              else {
+                hook[key].push(json[key])
+              }
+            })
           }
         }
       })
