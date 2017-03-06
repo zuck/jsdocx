@@ -195,7 +195,7 @@ describe('#Element', () => {
         }
       })
     })
-    it('should insert more contents at given hook when is an array', () => {
+    it('should append more contents at given hook when is an array', () => {
       let p = new jsdocx.Element({
         'a': 'Foo',
         b: 'Bar',
@@ -257,6 +257,21 @@ describe('#Element', () => {
             }]
           }
         }
+      })
+    })
+    it('should ignore invalid contents', () => {
+      let e = new jsdocx.Element({
+        'a': 'Foo',
+        b: 'Bar',
+        c: {}
+      }, '.c')
+      e.contents.push(null)
+      e.contents.push(false)
+      e.contents.push(true)
+      assert.deepEqual(e.toJson(), {
+        'a': 'Foo',
+        'b': 'Bar',
+        'c': {}
       })
     })
     it('should return a JSON repr of content tree', () => {
