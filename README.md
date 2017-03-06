@@ -23,7 +23,9 @@ $ npm run build
 import jsdocx from 'jsdocx'
 
 let doc = new jsdocx.Document()
-doc.addParagraph().addRun().addText('Hello World!')
+let p = doc.addParagraph()
+p.addRun().addText('Hello World!')
+p.addFormat().addHAlignment().setVal('center')
 doc.generate().then((content) => {
   // e.g. saveAs(content, 'hello.docx')
 })
