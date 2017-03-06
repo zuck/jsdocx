@@ -4,41 +4,41 @@ import jsdocx from '../dist/jsdocx'
 describe('#Element', () => {
   describe('#src', () => {
     it('should exist after creation', () => {
-      let m = new jsdocx.Element()
-      assert.equal(m.hasOwnProperty('src'), true)
-      assert.equal(typeof m.src, 'object')
+      let e = new jsdocx.Element()
+      assert.equal(e.hasOwnProperty('src'), true)
+      assert.equal(typeof e.src, 'object')
     })
     it('should contain given content tree', () => {
       let tree = {
         a: 'Foo',
         b: 'Bar'
       }
-      let m = new jsdocx.Element(tree)
-      assert.equal(m.hasOwnProperty('src'), true)
-      assert.equal(m.src, tree)
+      let e = new jsdocx.Element(tree)
+      assert.equal(e.hasOwnProperty('src'), true)
+      assert.equal(e.src, tree)
     })
   })
   describe('#contents', () => {
     it('should exist after creation', () => {
-      let p = new jsdocx.Element()
-      assert.equal(p.hasOwnProperty('contents'), true)
-      assert.equal(p.contents instanceof Array, true)
-      assert.equal(p.contents.length, 0)
+      let e = new jsdocx.Element()
+      assert.equal(e.hasOwnProperty('contents'), true)
+      assert.equal(e.contents instanceof Array, true)
+      assert.equal(e.contents.length, 0)
     })
   })
   describe('#contentHook', () => {
     it('should exist after creation', () => {
-      let p = new jsdocx.Element()
-      assert.equal(p.hasOwnProperty('contentHook'), true)
-      assert.equal(typeof p.contentHook, 'object')
+      let e = new jsdocx.Element()
+      assert.equal(e.hasOwnProperty('contentHook'), true)
+      assert.equal(typeof e.contentHook, 'object')
     })
     it('should be "null" if not specified', () => {
-      let p = new jsdocx.Element()
-      assert.equal(p.contentHook, null)
+      let e = new jsdocx.Element()
+      assert.equal(e.contentHook, null)
     })
     it('should be equal to given value', () => {
-      let p = new jsdocx.Element({ foo: 'bar' }, '.foo')
-      assert.equal(p.contentHook, '.foo')
+      let e = new jsdocx.Element({ foo: 'bar' }, '.foo')
+      assert.equal(e.contentHook, '.foo')
     })
     it('should throw a TypeError if invalid', () => {
       assert.throws(() => {
@@ -52,8 +52,8 @@ describe('#Element', () => {
         'a': 'Foo',
         b: 'Bar'
       }
-      let m = new jsdocx.Element(src)
-      assert.deepEqual(m.toJson(), {
+      let e = new jsdocx.Element(src)
+      assert.deepEqual(e.toJson(), {
         'a': 'Foo',
         'b': 'Bar'
       })
@@ -64,10 +64,10 @@ describe('#Element', () => {
         b: 'Bar',
         c: {}
       })
-      let m = new jsdocx.Element({
+      let e = new jsdocx.Element({
         d: 1
       })
-      p.contents.push(m)
+      p.contents.push(e)
       assert.deepEqual(p.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
@@ -80,10 +80,10 @@ describe('#Element', () => {
         b: 'Bar',
         c: {}
       }, '.c')
-      let m = new jsdocx.Element({
+      let e = new jsdocx.Element({
         d: 1
       })
-      p.contents.push(m)
+      p.contents.push(e)
       assert.deepEqual(p.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
@@ -98,10 +98,10 @@ describe('#Element', () => {
         b: 'Bar',
         c: []
       }, '.c')
-      let m = new jsdocx.Element({
+      let e = new jsdocx.Element({
         d: 1
       })
-      p.contents.push(m)
+      p.contents.push(e)
       assert.deepEqual(p.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
@@ -121,10 +121,10 @@ describe('#Element', () => {
           }
         }
       }, '.c.d.e')
-      let m = new jsdocx.Element({
+      let e = new jsdocx.Element({
         f: 1
       })
-      p.contents.push(m)
+      p.contents.push(e)
       assert.deepEqual(p.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
@@ -147,10 +147,10 @@ describe('#Element', () => {
           }
         }
       }, '.c.d.e')
-      let m = new jsdocx.Element({
+      let e = new jsdocx.Element({
         f: 1
       })
-      p.contents.push(m)
+      p.contents.push(e)
       assert.deepEqual(p.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
@@ -174,14 +174,14 @@ describe('#Element', () => {
           }
         }
       }, '.c.d.e')
-      let m1 = new jsdocx.Element({
+      let e1 = new jsdocx.Element({
         f: 1
       })
-      let m2 = new jsdocx.Element({
+      let e2 = new jsdocx.Element({
         'g': 2
       })
-      p.contents.push(m1)
-      p.contents.push(m2)
+      p.contents.push(e1)
+      p.contents.push(e2)
       assert.deepEqual(p.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
@@ -205,14 +205,14 @@ describe('#Element', () => {
           }
         }
       }, '.c.d.e')
-      let m1 = new jsdocx.Element({
+      let e1 = new jsdocx.Element({
         f: 1
       })
-      let m2 = new jsdocx.Element({
+      let e2 = new jsdocx.Element({
         'g': 2
       })
-      p.contents.push(m1)
-      p.contents.push(m2)
+      p.contents.push(e1)
+      p.contents.push(e2)
       assert.deepEqual(p.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
@@ -237,14 +237,14 @@ describe('#Element', () => {
           }
         }
       }, '.c["d.e"].f')
-      let m1 = new jsdocx.Element({
+      let e1 = new jsdocx.Element({
         g: 1
       })
-      let m2 = new jsdocx.Element({
+      let e2 = new jsdocx.Element({
         h: 2
       })
-      p.contents.push(m1)
-      p.contents.push(m2)
+      p.contents.push(e1)
+      p.contents.push(e2)
       assert.deepEqual(p.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
@@ -259,16 +259,14 @@ describe('#Element', () => {
         }
       })
     })
-  })
-  describe('#toJson', () => {
     it('should return a JSON repr of content tree', () => {
-      let m = new jsdocx.Element({
+      let e = new jsdocx.Element({
         a: 'Foo',
         b: 'Bar',
         'c': [],
         d: 1
       })
-      assert.deepEqual(m.toJson(), {
+      assert.deepEqual(e.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
         'c': [],
@@ -278,7 +276,7 @@ describe('#Element', () => {
   })
   describe('#toXml', () => {
     it('should return a XML repr of content tree', () => {
-      let m = new jsdocx.Element({
+      let e = new jsdocx.Element({
         a: {
           '@foo': 'bar',
           '#': 'Foo'
@@ -287,7 +285,7 @@ describe('#Element', () => {
         'c': {},
         d: 1
       })
-      assert.equal(m.toXml(), '<a foo="bar">Foo</a><b>Bar</b><c></c><d>1</d>')
+      assert.equal(e.toXml(), '<a foo="bar">Foo</a><b>Bar</b><c></c><d>1</d>')
     })
     it('should return a XML repr of full content tree (with children)', () => {
       let p = new jsdocx.Element({
@@ -299,10 +297,10 @@ describe('#Element', () => {
         'c': {},
         d: 1
       }, '.c')
-      let m = new jsdocx.Element({
+      let e = new jsdocx.Element({
         e: 2
       })
-      p.contents.push(m)
+      p.contents.push(e)
       assert.equal(p.toXml(), '<a foo="bar">Foo</a><b>Bar</b><c><e>2</e></c><d>1</d>')
     })
   })
