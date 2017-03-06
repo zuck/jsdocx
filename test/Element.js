@@ -273,6 +273,28 @@ describe('#Element', () => {
         'd': 1
       })
     })
+    it('should call "finalize" before converting element to JSON', () => {
+      let e = new jsdocx.Element({
+        a: 'Foo',
+        b: 'Bar',
+        'c': [],
+        d: 1
+      }, '.c')
+      e.finalize = function (contents) {
+        contents.push(new jsdocx.Element({
+          e: 2
+        }))
+      }
+      assert.deepEqual(e.toJson(), {
+        'a': 'Foo',
+        'b': 'Bar',
+        'c': [{
+          'e': 2
+        }],
+        'd': 1
+      })
+      assert.equal(e.contents.length, 0)
+    })
   })
   describe('#toXml', () => {
     it('should return a XML repr of content tree', () => {
