@@ -1,6 +1,6 @@
-import SerializeMixin from './SerializeMixin'
+import Element from './Element'
 
-export default class extends SerializeMixin {
+export default class extends Element {
   constructor (str, space) {
     super({
       'w:t': {

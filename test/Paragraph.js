@@ -19,7 +19,7 @@ describe('#Paragraph', () => {
   describe('#toJson', () => {
     it('should insert contents inside "w:p" tag', () => {
       let p = new jsdocx.Paragraph()
-      let m = new jsdocx.SerializeMixin({ a: 2 })
+      let m = new jsdocx.Element({ a: 2 })
       p.contents.push(m)
       assert.deepEqual(p.toJson(), { 'w:p': [{ 'a': 2 }] })
     })

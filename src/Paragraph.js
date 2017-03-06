@@ -1,7 +1,7 @@
-import SerializeMixin from './SerializeMixin'
+import Element from './Element'
 import Run from './Run'
 
-export default class extends SerializeMixin {
+export default class extends Element {
   constructor () {
     super({ 'w:p': [] }, '["w:p"]')
   }

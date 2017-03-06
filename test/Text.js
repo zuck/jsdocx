@@ -59,7 +59,7 @@ describe('#Text', () => {
     })
     it('should insert given content along with text string', () => {
       let t = new jsdocx.Text('Hello World!')
-      let m = new jsdocx.SerializeMixin({ a: 2 })
+      let m = new jsdocx.Element({ a: 2 })
       t.contents.push(m)
       assert.deepEqual(t.toJson(), {
         'w:t': {
