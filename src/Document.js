@@ -36,7 +36,7 @@ export default class {
           "@xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
           "@xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape",
           "@mc:Ignorable": "w14 wp14",
-          "w:body": []
+          "w:body": {}
         }
       }, '["w:document"]["w:body"]'),
       '[Content_Types].xml': new File({
