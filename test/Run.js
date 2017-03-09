@@ -16,6 +16,13 @@ describe('#Run', () => {
       assert.equal(r.contentHook, '["w:r"]')
     })
   })
+  describe('#addFormat', () => {
+    it('should add a valid format', () => {
+      let r = new jsdocx.Run()
+      let f = r.addFormat()
+      assert.equal(f instanceof jsdocx.RunFormat, true)
+    })
+  })
   describe('#toJson', () => {
     it('should insert contents inside "w:r" tag', () => {
       let r = new jsdocx.Run()
