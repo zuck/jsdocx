@@ -2,23 +2,27 @@ import Element from './Element'
 import RunBold from './RunBold'
 import RunItalic from './RunItalic'
 import RunFonts from './RunFonts'
+import Shading from './Shading'
 
 export default class extends Element {
   constructor (
     bold,
     italic,
-    fonts
+    fonts,
+    shading
   ) {
     super({ 'w:rPr': {} }, '["w:rPr"]')
     if (bold) this.setBold(bold || null)
     if (italic) this.setItalic(italic || null)
     if (fonts) this.setFonts(fonts || null)
+    if (shading) this.setShading(shading || null)
   }
 
   finalize (contents) {
     if (this.bold) contents.push(this.bold)
     if (this.italic) contents.push(this.italic)
     if (this.fonts) contents.push(this.fonts)
+    if (this.shading) contents.push(this.shading)
   }
 
   addBold () {
@@ -87,5 +91,25 @@ export default class extends Element {
 
   getFonts () {
     return this.fonts
+  }
+
+  addShading () {
+    let sh = new Shading()
+    this.setShading(sh)
+    return sh
+  }
+
+  setShading (value) {
+    if (!(
+      value instanceof Shading ||
+      value === null
+    )) {
+      throw TypeError('Invalid RunFormat.shading')
+    }
+    this.shading = value
+  }
+
+  getShading () {
+    return this.shading
   }
 }

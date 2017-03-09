@@ -6,7 +6,7 @@ import ParagraphSpacing from './ParagraphSpacing'
 import ParagraphTabs from './ParagraphTabs'
 import ParagraphHAlignment from './ParagraphHAlignment'
 import ParagraphVAlignment from './ParagraphVAlignment'
-import ParagraphShading from './ParagraphShading'
+import Shading from './Shading'
 
 export default class extends Element {
   constructor(
@@ -187,14 +187,14 @@ export default class extends Element {
   }
 
   addShading () {
-    let sh = new ParagraphShading()
+    let sh = new Shading()
     this.setShading(sh)
     return sh
   }
 
   setShading (value) {
     if (!(
-      value instanceof ParagraphShading ||
+      value instanceof Shading ||
       value === null
     )) {
       throw TypeError('Invalid ParagraphFormat.shading')
