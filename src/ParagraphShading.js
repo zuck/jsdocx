@@ -6,7 +6,7 @@ export default class extends Element {
     color,
     val
   ) {
-    super({ 'w:shd': null })
+    super({ 'w:shd': {} })
     if (fill) this.setFill(fill || null)
     if (color) this.setColor(color || null)
     if (val) this.setVal(val || null)
