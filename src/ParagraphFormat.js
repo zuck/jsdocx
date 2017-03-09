@@ -6,6 +6,7 @@ import ParagraphSpacing from './ParagraphSpacing'
 import ParagraphTabs from './ParagraphTabs'
 import ParagraphHAlignment from './ParagraphHAlignment'
 import ParagraphVAlignment from './ParagraphVAlignment'
+import ParagraphShading from './ParagraphShading'
 
 export default class extends Element {
   constructor(
@@ -15,7 +16,8 @@ export default class extends Element {
     spacing,
     tabs,
     hAlignment,
-    vAlignment
+    vAlignment,
+    shading
   ) {
     super({ 'w:pPr': {} }, '["w:pPr"]')
     this.setIndentation(indentation || null)
@@ -25,6 +27,7 @@ export default class extends Element {
     this.setTabs(tabs || null)
     this.setHAlignment(hAlignment || null)
     this.setVAlignment(vAlignment || null)
+    this.setShading(shading || null)
   }
 
   finalize (contents) {
@@ -35,6 +38,7 @@ export default class extends Element {
     if (this.tabs) contents.push(this.tabs)
     if (this.hAlignment) contents.push(this.hAlignment)
     if (this.vAlignment) contents.push(this.vAlignment)
+    if (this.shading) contents.push(this.shading)
   }
 
   addIndentation () {
@@ -180,5 +184,25 @@ export default class extends Element {
 
   getVAlignment () {
     return this.vAlignment
+  }
+
+  addShading () {
+    let sh = new ParagraphShading()
+    this.setShading(sh)
+    return sh
+  }
+
+  setShading (value) {
+    if (!(
+      value instanceof ParagraphShading ||
+      value === null
+    )) {
+      throw TypeError('Invalid ParagraphFormat.shading')
+    }
+    this.shading = value
+  }
+
+  getShading () {
+    return this.shading
   }
 }
