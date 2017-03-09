@@ -2,27 +2,27 @@ import Element from './Element'
 import RunBold from './RunBold'
 import RunItalic from './RunItalic'
 import RunFonts from './RunFonts'
-import Shading from './Shading'
+import RunColor from './RunColor'
 
 export default class extends Element {
   constructor (
     bold,
     italic,
     fonts,
-    shading
+    color
   ) {
     super({ 'w:rPr': {} }, '["w:rPr"]')
     if (bold) this.setBold(bold || null)
     if (italic) this.setItalic(italic || null)
     if (fonts) this.setFonts(fonts || null)
-    if (shading) this.setShading(shading || null)
+    if (color) this.setColor(color || null)
   }
 
   finalize (contents) {
     if (this.bold) contents.push(this.bold)
     if (this.italic) contents.push(this.italic)
     if (this.fonts) contents.push(this.fonts)
-    if (this.shading) contents.push(this.shading)
+    if (this.color) contents.push(this.color)
   }
 
   addBold () {
@@ -93,23 +93,27 @@ export default class extends Element {
     return this.fonts
   }
 
-  addShading () {
-    let sh = new Shading()
-    this.setShading(sh)
-    return sh
+  addColor () {
+    let rc = new RunColor()
+    this.setColor(rc)
+    return rc
   }
 
-  setShading (value) {
+  setColor (value) {
     if (!(
-      value instanceof Shading ||
+      value instanceof RunColor ||
+      typeof value === 'string' ||
       value === null
     )) {
-      throw TypeError('Invalid RunFormat.shading')
+      throw TypeError('Invalid RunFormat.color')
     }
-    this.shading = value
+    if (typeof value === 'string') {
+      value = new RunColor(value)
+    }
+    this.color = value
   }
 
-  getShading () {
-    return this.shading
+  getColor () {
+    return this.color
   }
 }
