@@ -1,6 +1,6 @@
 {
   "name": "jsdocx",
-  "version": "0.0.8",
+  "version": "0.0.7",
   "description": "Generate .docx files from JS",
   "main": "dist/jsdocx.js",
   "scripts": {
