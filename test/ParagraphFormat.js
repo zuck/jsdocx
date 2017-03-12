@@ -7,7 +7,13 @@ describe('#ParagraphFormat', () => {
       let f = new jsdocx.ParagraphFormat()
       let e = new jsdocx.Element({ a: 2 })
       f.contents.push(e)
-      assert.deepEqual(f.toJson(), { 'w:pPr': { 'a': 2 } })
+      assert.deepEqual(f.toJson(), {
+        'w:pPr': {
+          '#': [{
+            'a': 2
+          }]
+        }
+      })
     })
   })
   describe('#toXml', () => {

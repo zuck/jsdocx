@@ -28,7 +28,13 @@ describe('#Paragraph', () => {
       let p = new jsdocx.Paragraph()
       let m = new jsdocx.Element({ a: 2 })
       p.contents.push(m)
-      assert.deepEqual(p.toJson(), { 'w:p': { 'a': 2 } })
+      assert.deepEqual(p.toJson(), {
+        'w:p': {
+          '#': [{
+            'a': 2
+          }]
+        }
+      })
     })
   })
   describe('#toXml', () => {

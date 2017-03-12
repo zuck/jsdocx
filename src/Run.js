@@ -1,5 +1,6 @@
 import Element from './Element'
 import RunFormat from './RunFormat'
+import RunBreak from './RunBreak'
 import Text from './Text'
 
 export default class extends Element {
@@ -33,5 +34,11 @@ export default class extends Element {
     let t = new Text(str)
     this.contents.push(t)
     return t
+  }
+
+  addBreak (type) {
+    let rb = new RunBreak(type)
+    this.contents.push(rb)
+    return rb
   }
 }

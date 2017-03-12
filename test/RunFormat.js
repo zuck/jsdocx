@@ -7,7 +7,13 @@ describe('#RunFormat', () => {
       let f = new jsdocx.RunFormat()
       let e = new jsdocx.Element({ a: 2 })
       f.contents.push(e)
-      assert.deepEqual(f.toJson(), { 'w:rPr': { 'a': 2 } })
+      assert.deepEqual(f.toJson(), {
+        'w:rPr':{
+          '#': [{
+            'a': 2
+          }]
+        }
+      })
     })
   })
   describe('#toXml', () => {

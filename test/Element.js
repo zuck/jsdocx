@@ -88,11 +88,13 @@ describe('#Element', () => {
         'a': 'Foo',
         'b': 'Bar',
         'c': {
-          'd': 1
+          '#': [{
+            'd': 1
+          }]
         }
       })
     })
-    it('should append content at given hook when is an array', () => {
+    it('should ignore contents when given hook is an array', () => {
       let p = new jsdocx.Element({
         'a': 'Foo',
         b: 'Bar',
@@ -105,9 +107,7 @@ describe('#Element', () => {
       assert.deepEqual(p.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
-        'c': [{
-          'd': 1
-        }]
+        'c': []
       })
     })
     it('should append content at given complex hook', () => {
@@ -131,13 +131,15 @@ describe('#Element', () => {
         'c': {
           'd': {
             'e': {
-              'f': 1
+              '#': [{
+                'f': 1
+              }]
             }
           }
         }
       })
     })
-    it('should append content at given complex hook when is an array', () => {
+    it('should ignore contents when given complex hook is an array', () => {
       let p = new jsdocx.Element({
         'a': 'Foo',
         b: 'Bar',
@@ -156,9 +158,7 @@ describe('#Element', () => {
         'b': 'Bar',
         'c': {
           'd': {
-            'e': [{
-              'f': 1
-            }]
+            'e': []
           }
         }
       })
@@ -188,14 +188,17 @@ describe('#Element', () => {
         'c': {
           'd': {
             'e': {
-              'f': 1,
-              'g': 2
+              '#': [{
+                'f': 1
+              }, {
+                'g': 2
+              }]
             }
           }
         }
       })
     })
-    it('should append more contents at given hook when is an array', () => {
+    it('should ignore all contents at given hook when is an array', () => {
       let p = new jsdocx.Element({
         'a': 'Foo',
         b: 'Bar',
@@ -218,16 +221,12 @@ describe('#Element', () => {
         'b': 'Bar',
         'c': {
           'd': {
-            'e': [{
-              'f': 1
-            }, {
-              'g': 2
-            }]
+            'e': []
           }
         }
       })
     })
-    it('should merge more contents at given hook when similar', () => {
+    it('should concatenate contents at given hook even if similar', () => {
       let p = new jsdocx.Element({
         'a': 'Foo',
         b: 'Bar',
@@ -251,7 +250,13 @@ describe('#Element', () => {
         'b': 'Bar',
         'c': {
           'd': {
-            'e': [{ 'f': 1 }, 2]
+            '#': [{
+              'e': {
+                'f': 1
+              }
+            }, {
+              'e': 2
+            }]
           }
         }
       })
@@ -262,7 +267,7 @@ describe('#Element', () => {
         b: 'Bar',
         c: {
           'd.e': {
-            'f': []
+            'f': {}
           }
         }
       }, '.c["d.e"].f')
@@ -279,12 +284,47 @@ describe('#Element', () => {
         'b': 'Bar',
         'c': {
           'd.e': {
-            'f': [{
-              'g': 1
-            }, {
-              'h': 2
-            }]
+            'f': {
+              '#': [{
+                'g': 1
+              }, {
+                'h': 2
+              }]
+            }
           }
+        }
+      })
+    })
+    it('should keep original insertion order of contents', () => {
+      let p = new jsdocx.Element({
+        'a': 'Foo',
+        b: 'Bar',
+        c: {
+        }
+      }, '.c')
+      let e1 = new jsdocx.Element({
+        d: 1
+      })
+      let e2 = new jsdocx.Element({
+        e: 2
+      })
+      let e3 = new jsdocx.Element({
+        d: 1
+      })
+      p.contents.push(e1)
+      p.contents.push(e2)
+      p.contents.push(e3)
+      assert.deepEqual(p.toJson(), {
+        'a': 'Foo',
+        'b': 'Bar',
+        'c': {
+          '#': [{
+            'd': 1
+          }, {
+            'e': 2
+          }, {
+            'd': 1
+          }]
         }
       })
     })
@@ -321,9 +361,11 @@ describe('#Element', () => {
       let e = new jsdocx.Element({
         a: 'Foo',
         b: 'Bar',
-        'c': [{
-          d: 1
-        }],
+        'c': {
+          '#': [{
+            d: 1
+          }]
+        },
         e: 2
       }, '.c')
       e.finalize = function (contents) {
@@ -337,13 +379,15 @@ describe('#Element', () => {
       assert.deepEqual(e.toJson(), {
         'a': 'Foo',
         'b': 'Bar',
-        'c': [{
-          'd': 1
-        }, {
-          'g': 4
-        }, {
-          'f': 3
-        }],
+        'c': {
+          '#': [{
+            'd': 1
+          }, {
+            'g': 4
+          }, {
+            'f': 3
+          }]
+        },
         'e': 2
       })
       assert.equal(e.contents.length, 0)

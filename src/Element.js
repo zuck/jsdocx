@@ -23,29 +23,31 @@ export default class {
 
     this.finalize(contents)
 
-    if (this.contentHook) {
-      let hook = eval('src' + this.contentHook)
-      contents.forEach((c) => {
-        if (c && c.toJson) {
-          let json = c.toJson()
-          if (hook instanceof Array) {
-            hook.push(json)
-          }
-          else {
-            Object.keys(json).forEach((key) => {
-              if (!key in hook || !hook[key]) {
-                hook[key] = json[key]
-              }
-              else if (!(hook[key] instanceof Array)) {
-                hook[key] = [hook[key], json[key]]
-              }
-              else {
-                hook[key].push(json[key])
-              }
-            })
-          }
+    let realContents = contents.filter((c) => {
+      return (c && ((c instanceof String) || (typeof c === 'object')))
+    })
+
+    if (this.contentHook && realContents.length > 0) {
+      let cntHookPath = this.contentHook
+      if (cntHookPath.endsWith('["#"]')) {
+        cntHookPath = cntHookPath.splice(0, cntHookPath.length - 5)
+      }
+      let hook = eval('src' + cntHookPath)
+      if (typeof hook === 'object') {
+        if (Object.keys(hook).indexOf('#') === -1) {
+          hook['#'] = []
         }
-      })
+        let hookCnt = hook['#']
+        if (!(hookCnt instanceof Array)) {
+          hook['#'] = [hookCnt].filter((i) => { return i !== null })
+        }
+        realContents.forEach((c) => {
+          if (c && c.toJson) {
+            let json = c.toJson()
+            hook['#'].push(json)
+          }
+        })
+      }
     }
 
     return JSON.parse(JSON.stringify(src))

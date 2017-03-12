@@ -63,9 +63,12 @@ describe('#Text', () => {
       t.contents.push(m)
       assert.deepEqual(t.toJson(), {
         'w:t': {
-          '#': 'Hello World!',
-          '@xml:space': 'preserve',
-          'a': 2
+          '#': [
+            'Hello World!', {
+              'a': 2
+            }
+          ],
+          '@xml:space': 'preserve'
         }
       })
     })
