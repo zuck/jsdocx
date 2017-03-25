@@ -1,5 +1,6 @@
 import Element from './Element'
 import SectionCols from './SectionCols'
+import SectionType from './SectionType'
 import PageMargins from './PageMargins'
 import PageSize from './PageSize'
 import Paragraph from './Paragraph'
@@ -8,18 +9,21 @@ export default class extends Element {
   constructor (
     cols,
     pgMar,
-    pgSz
+    pgSz,
+    type
   ) {
     super({ 'w:sectPr': {} }, '["w:sectPr"]')
     this.setCols(cols || null)
     this.setPageMargins(pgMar || null)
     this.setPageSize(pgSz || null)
+    this.setType(type || null)
   }
 
   finalize (contents) {
     if (this.cols) contents.push(this.cols)
     if (this.pgMar) contents.push(this.pgMar)
     if (this.pgSz) contents.push(this.pgSz)
+    if (this.type) contents.push(this.type)
   }
 
   toJson () {
@@ -33,7 +37,12 @@ export default class extends Element {
           let patchS = new Element(
             section.src,
             section.contentHook,
-            [ section.cols, section.pgMar, section.pgSz ]
+            [
+              section.cols,
+              section.pgMar,
+              section.pgSz,
+              section.type
+            ]
           )
           let patchP = new Paragraph()
           patchP.contents = p.contents.slice(0)
@@ -103,5 +112,22 @@ export default class extends Element {
 
   getPageSize () {
     return this.pgSz
+  }
+
+  addType () {
+    let t = new SectionType()
+    this.setType(t)
+    return t
+  }
+
+  setType (value) {
+    if (!(value instanceof SectionType || value === null)) {
+      throw TypeError('Invalid Section.type')
+    }
+    this.type = value
+  }
+
+  getType () {
+    return this.type
   }
 }
