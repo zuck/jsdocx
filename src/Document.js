@@ -62,9 +62,9 @@ export default class {
     }
 
     var r = this.root()
-    r.page = new Section()
+    r.pageSection = new Section()
     r.finalize = function (contents) {
-      contents.push(this.page)
+      contents.push(this.pageSection)
     }
   }
 
@@ -79,7 +79,7 @@ export default class {
   }
 
   addSection () {
-    let s = new Sections()
+    let s = new Section()
     this.root().contents.push(s)
     return s
   }
@@ -91,15 +91,15 @@ export default class {
   }
 
   addCols () {
-    return this.root().section.addCols()
+    return this.root().pageSection.addCols()
   }
 
   addPageMargins () {
-    return this.root().section.addPageMargins()
+    return this.root().pageSection.addPageMargins()
   }
 
   addPageSize () {
-    return this.root().section.addPageMargins()
+    return this.root().pageSection.addPageMargins()
   }
 
   toZip () {

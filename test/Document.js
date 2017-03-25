@@ -29,11 +29,24 @@ describe('#Document', () => {
       // assert.equal(typeof doc.files['Content_Types.xml'], 'object')
     })
   })
+  describe('#pageSection', () => {
+    it('should add a root section to document', () => {
+      let doc = new jsdocx.Document()
+      assert.equal(doc.root().pageSection instanceof jsdocx.Section, true)
+    })
+  })
   describe('#addParagraph', () => {
     it('should add a valid paragraph', () => {
       let doc = new jsdocx.Document()
       let p = doc.addParagraph()
       assert.equal(p instanceof jsdocx.Paragraph, true)
+    })
+  })
+  describe('#addSection', () => {
+    it('should add a valid section', () => {
+      let doc = new jsdocx.Document()
+      let s = doc.addSection()
+      assert.equal(s instanceof jsdocx.Section, true)
     })
   })
   describe('#toZip', () => {
