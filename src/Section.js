@@ -27,33 +27,28 @@ export default class extends Element {
   }
 
   toJson () {
-    let section = this
-    let count = this.contents.filter((c) => { return c !== null }).length
-    if (count) {
-      // If a section contains any paragraph, it renders its contents
-      // "injecting" itself into the props of its last paragraph.
-      let patchContents = this.contents.map((p, i) => {
-        if (i + 1 === count) {
-          let patchS = new Element(
-            section.src,
-            section.contentHook,
-            [
-              section.cols,
-              section.pgMar,
-              section.pgSz,
-              section.type
-            ]
-          )
-          let patchP = new Paragraph()
-          patchP.contents = p.contents.slice(0)
-          patchP.format = p.format || patchP.addFormat()
-          patchP.format.contents.push(patchS)
-          return patchP.toJson()
-        }
-        return p.toJson()
-      })
+    let realContents = this.contents.filter((c) => { return c !== null })
+    // If a section contains any paragraph, it renders its contents
+    // "injecting" itself into the props of last (injected too) paragraph.
+    if (realContents.length > 0) {
+      let patchContents = realContents.map((c) => { return c.toJson() })
+      let injectedP = new Paragraph()
+      injectedP.addFormat().contents.push(
+        new Element(
+          this.src,
+          this.contentHook,
+          [
+            this.cols,
+            this.pgMar,
+            this.pgSz,
+            this.type
+          ]
+        )
+      )
+      patchContents.push(injectedP.toJson())
       return JSON.parse(JSON.stringify(patchContents))
     }
+    // Otherwise render as a normal element.
     return super.toJson()
   }
 

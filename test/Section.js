@@ -37,12 +37,16 @@ describe('#Section', () => {
         }
       })
     })
-    it('should insert "w:sectPr" tag inside last paragraph\'s props', () => {
+    it('should insert "w:sectPr" tag inside an injected paragraph\'s props', () => {
       let s = new jsdocx.Section()
       s.addCols().setNum(2)
       let p1 = s.addParagraph()
       let p2 = s.addParagraph()
       assert.deepEqual(s.toJson(), [
+        {
+          'w:p': {
+          }
+        },
         {
           'w:p': {
           }
@@ -73,16 +77,16 @@ describe('#Section', () => {
       let s = new jsdocx.Section()
       s.addParagraph().addRun().addText('Hello World!')
       s.addParagraph()
-      assert.equal(s.toXml(), '<w:p><w:r><w:t xml:space="preserve">Hello World!</w:t></w:r></w:p><w:p><w:pPr><w:sectPr></w:sectPr></w:pPr></w:p>')
+      assert.equal(s.toXml(), '<w:p><w:r><w:t xml:space="preserve">Hello World!</w:t></w:r></w:p><w:p></w:p><w:p><w:pPr><w:sectPr></w:sectPr></w:pPr></w:p>')
     })
-    it('should render respecting previous paragraph\'s format', () => {
+    it('should respect previous paragraph\'s format', () => {
       let s = new jsdocx.Section()
       s.addCols().setNum(2)
       let p = s.addParagraph()
       p.addRun().addText('Hello World!')
       // Format will be injected before any other content.
       p.addFormat().addTabs().addTab()
-      assert.equal(s.toXml(), '<w:p><w:pPr><w:sectPr><w:cols w:num="2"/></w:sectPr><w:tabs><w:tab/></w:tabs></w:pPr><w:r><w:t xml:space="preserve">Hello World!</w:t></w:r></w:p>')
+      assert.equal(s.toXml(), '<w:p><w:pPr><w:tabs><w:tab/></w:tabs></w:pPr><w:r><w:t xml:space="preserve">Hello World!</w:t></w:r></w:p><w:p><w:pPr><w:sectPr><w:cols w:num="2"/></w:sectPr></w:pPr></w:p>')
     })
   })
 })
