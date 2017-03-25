@@ -1,10 +1,10 @@
 import { toXML as convertToXml } from 'to-xml'
 
 export default class {
-  constructor (src, contenthook) {
+  constructor (src, contenthook, contents) {
     this.src = src || {}
-    this.contents = []
     this.contentHook = contenthook || null
+    this.contents = contents || []
     if (
       this.contentHook &&
       (['.', '['].indexOf(this.contentHook[0]) === -1)

@@ -1,6 +1,7 @@
 import JSZip from 'jszip'
 import File from './File'
 import Paragraph from './Paragraph'
+import Section from './Section'
 
 export default class {
   constructor() {
@@ -59,6 +60,12 @@ export default class {
         }
       })
     }
+
+    var r = this.root()
+    r.page = new Section()
+    r.finalize = function (contents) {
+      contents.push(this.page)
+    }
   }
 
   root () {
@@ -71,10 +78,28 @@ export default class {
     return f
   }
 
+  addSection () {
+    let s = new Sections()
+    this.root().contents.push(s)
+    return s
+  }
+
   addParagraph () {
     let p = new Paragraph()
     this.root().contents.push(p)
     return p
+  }
+
+  addCols () {
+    return this.root().section.addCols()
+  }
+
+  addPageMargins () {
+    return this.root().section.addPageMargins()
+  }
+
+  addPageSize () {
+    return this.root().section.addPageMargins()
   }
 
   toZip () {

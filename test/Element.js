@@ -25,6 +25,11 @@ describe('#Element', () => {
       assert.equal(e.contents instanceof Array, true)
       assert.equal(e.contents.length, 0)
     })
+    it('should add contents passed as argument', () => {
+      let c = new jsdocx.Element('{ "bar" }')
+      let e = new jsdocx.Element('{ "foo" }', '["foo"]', [c])
+      assert.deepEqual(e.contents, [c])
+    })
   })
   describe('#contentHook', () => {
     it('should exist after creation', () => {
