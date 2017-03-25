@@ -74,15 +74,15 @@ export default class extends Element {
 
   setLeft (value) {
     if (value) {
-      this.src['w:pgMar']['@w:footer'] = value
+      this.src['w:pgMar']['@w:left'] = value
     }
     else {
-      delete this.src['w:pgMar']['@w:footer']
+      delete this.src['w:pgMar']['@w:left']
     }
   }
 
   getLeft () {
-    return this.src['w:pgMar']['@w:footer'] || null
+    return this.src['w:pgMar']['@w:left'] || null
   }
 
   setRight (value) {
