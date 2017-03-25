@@ -10,26 +10,30 @@ export default class extends Element {
     pgMar,
     pgSz
   ) {
-    super({ 'w:sectPr': {} })
+    super({ 'w:sectPr': {} }, '["w:sectPr"]')
     this.setCols(cols || null)
     this.setPageMargins(pgMar || null)
     this.setPageSize(pgSz || null)
+  }
+
+  finalize (contents) {
+    if (this.cols) contents.push(this.cols)
+    if (this.pgMar) contents.push(this.pgMar)
+    if (this.pgSz) contents.push(this.pgSz)
   }
 
   toJson () {
     let section = this
     let count = this.contents.filter((c) => { return c !== null }).length
     if (count) {
-      // If a section contains any paragraph, instead of default element
-      // rendering, it renders its contents and "injects" itself into the props
-      // of its last paragraph.
+      // If a section contains any paragraph, it renders its contents
+      // "injecting" itself into the props of its last paragraph.
       let patchContents = this.contents.map((p, i) => {
         if (i + 1 === count) {
           let patchS = new Element(
             section.src,
-            '["w:sectPr"]', [
-              section.cols, section.pgMar, section.pgSz
-            ]
+            section.contentHook,
+            [ section.cols, section.pgMar, section.pgSz ]
           )
           let patchP = new Paragraph()
           patchP.contents = p.contents.slice(0)

@@ -10,10 +10,10 @@ describe('#Section', () => {
     })
   })
   describe('#contentHook', () => {
-    it('should be null after creation', () => {
+    it('should be equal to "w:sectPr" after creation', () => {
       let s = new jsdocx.Section()
       assert.equal(s.hasOwnProperty('contentHook'), true)
-      assert.equal(s.contentHook, null)
+      assert.equal(s.contentHook, '["w:sectPr"]')
     })
   })
   describe('#addParagraph', () => {
@@ -24,8 +24,22 @@ describe('#Section', () => {
     })
   })
   describe('#toJson', () => {
+    it('should render "w:sectPr" normally if no paragraphs are added', () => {
+      let s = new jsdocx.Section()
+      s.addCols().setNum(2)
+      assert.deepEqual(s.toJson(), {
+        'w:sectPr': {
+          '#': [{
+            'w:cols': {
+              '@w:num': 2
+            }
+          }]
+        }
+      })
+    })
     it('should insert "w:sectPr" tag inside last paragraph\'s props', () => {
       let s = new jsdocx.Section()
+      s.addCols().setNum(2)
       let p1 = s.addParagraph()
       let p2 = s.addParagraph()
       assert.deepEqual(s.toJson(), [
@@ -39,6 +53,11 @@ describe('#Section', () => {
                 '#': [
                   {
                     'w:sectPr': {
+                      '#': [{
+                        'w:cols': {
+                          '@w:num': 2
+                        }
+                      }]
                     }
                   }
                 ]

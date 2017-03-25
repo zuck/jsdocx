@@ -36,8 +36,11 @@ describe('#Document', () => {
     })
     it('should be added at the end of root file body', () => {
       let doc = new jsdocx.Document()
+      doc.addParagraph()
       assert.deepEqual(doc.root().toJson()['w:document']['w:body'], {
         "#": [{
+          'w:p': {}
+        }, {
           'w:sectPr': {
           }
         }]
