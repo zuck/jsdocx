@@ -30,9 +30,39 @@ describe('#Document', () => {
     })
   })
   describe('#pageSection', () => {
-    it('should add a root section to document', () => {
+    it('should add a page section to document', () => {
       let doc = new jsdocx.Document()
       assert.equal(doc.root().pageSection instanceof jsdocx.Section, true)
+    })
+    it('should be added at the end of root file body', () => {
+      let doc = new jsdocx.Document()
+      assert.deepEqual(doc.root().toJson()['w:document']['w:body'], {
+        "#": [{
+          'w:sectPr': {
+          }
+        }]
+      })
+    })
+    describe('#addCols', () => {
+      it('should add cols to page section', () => {
+        let doc = new jsdocx.Document()
+        doc.addCols().setNum(5)
+        assert.equal(doc.root().pageSection.cols.getNum(), 5)
+      })
+    })
+    describe('#addPageMargins', () => {
+      it('should add page margins to page section', () => {
+        let doc = new jsdocx.Document()
+        doc.addPageMargins().setBottom(56)
+        assert.equal(doc.root().pageSection.pgMar.getBottom(), 56)
+      })
+    })
+    describe('#addPageSize', () => {
+      it('should add page size to page section', () => {
+        let doc = new jsdocx.Document()
+        doc.addPageSize().setW(19)
+        assert.equal(doc.root().pageSection.pgSz.getW(), 19)
+      })
     })
   })
   describe('#addParagraph', () => {

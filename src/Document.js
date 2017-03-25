@@ -64,7 +64,7 @@ export default class {
     var r = this.root()
     r.pageSection = new Section()
     r.finalize = function (contents) {
-      contents.push(this.pageSection)
+      contents.push(r.pageSection)
     }
   }
 
@@ -99,7 +99,7 @@ export default class {
   }
 
   addPageSize () {
-    return this.root().pageSection.addPageMargins()
+    return this.root().pageSection.addPageSize()
   }
 
   toZip () {

@@ -17,27 +17,31 @@ export default class extends Element {
   }
 
   toJson () {
-    // Instead of default element rendering, sections render their contents
-    // and "inject" themselves into the props of their last paragraph.
     let section = this
-    let count = this.contents.length
-    let patchContents = this.contents.map((p, i) => {
-      if (i + 1 === count) {
-        let patchS = new Element(
-          section.src,
-          '["w:sectPr"]', [
-            section.cols, section.pgMar, section.pgSz
-          ]
-        )
-        let patchP = new Paragraph()
-        patchP.contents = p.contents.slice(0)
-        patchP.format = p.format || patchP.addFormat()
-        patchP.format.contents.push(patchS)
-        return patchP.toJson()
-      }
-      return p.toJson()
-    })
-    return JSON.parse(JSON.stringify(patchContents))
+    let count = this.contents.filter((c) => { return c !== null }).length
+    if (count) {
+      // If a section contains any paragraph, instead of default element
+      // rendering, it renders its contents and "injects" itself into the props
+      // of its last paragraph.
+      let patchContents = this.contents.map((p, i) => {
+        if (i + 1 === count) {
+          let patchS = new Element(
+            section.src,
+            '["w:sectPr"]', [
+              section.cols, section.pgMar, section.pgSz
+            ]
+          )
+          let patchP = new Paragraph()
+          patchP.contents = p.contents.slice(0)
+          patchP.format = p.format || patchP.addFormat()
+          patchP.format.contents.push(patchS)
+          return patchP.toJson()
+        }
+        return p.toJson()
+      })
+      return JSON.parse(JSON.stringify(patchContents))
+    }
+    return super.toJson()
   }
 
   addParagraph () {
