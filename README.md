@@ -1,3 +1,5 @@
+![jsdocx](https://cdn.rawgit.com/zuck/jsdocx/b70fc554/jsdocx.svg)
+
 # jsdocx
 
 > Generate .docx files from JS
