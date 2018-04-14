@@ -113,9 +113,12 @@ export default class {
   }
 
   generate (type) {
-    if (typeof type === 'undefined') {
+    if (!type || typeof type === 'undefined') {
       type = 'blob'
     }
-    return this.toZip().generateAsync({ type: type })
+    return this.toZip().generateAsync({
+      type: 'blob',
+      mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    })
   }
 }
