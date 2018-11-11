@@ -51,7 +51,7 @@ export default class extends Element {
     if (!(value instanceof ParagraphIndentation || value === null)) {
       throw TypeError('Invalid ParagraphFormat.indentation')
     }
-    this.identation = value
+    this.indentation = value
   }
 
   getIndentation () {
