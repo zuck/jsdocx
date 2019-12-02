@@ -37,6 +37,10 @@ doc.generate().then((content) => {
 })
 ```
 
+## Reference
+
+- https://gist.github.com/felipeochoa/81d8fa27901e8222c6ffbeb165a85acc
+
 ## License
 
 The MIT License (MIT)
