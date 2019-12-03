@@ -4,6 +4,7 @@ import SectionType from './SectionType'
 import PageMargins from './PageMargins'
 import PageSize from './PageSize'
 import Paragraph from './Paragraph'
+import Table from './Table'
 
 export default class extends Element {
   constructor (
@@ -56,6 +57,12 @@ export default class extends Element {
     let p = new Paragraph()
     this.contents.push(p)
     return p
+  }
+
+  addTable () {
+    let t = new Table()
+    this.contents.push(t)
+    return t
   }
 
   addCols () {

@@ -1,6 +1,7 @@
 import JSZip from 'jszip'
 import File from './File'
 import Paragraph from './Paragraph'
+import Table from './Table'
 import Section from './Section'
 
 export default class {
@@ -88,6 +89,12 @@ export default class {
     let p = new Paragraph()
     this.root().contents.push(p)
     return p
+  }
+
+  addTable () {
+    let t = new Table()
+    this.root().contents.push(t)
+    return t
   }
 
   addCols () {

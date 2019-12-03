@@ -23,6 +23,13 @@ describe('#Section', () => {
       assert.equal(p instanceof jsdocx.Paragraph, true)
     })
   })
+  describe('#addTable', () => {
+    it('should add a valid table', () => {
+      let s = new jsdocx.Section()
+      let t = s.addTable()
+      assert.equal(t instanceof jsdocx.Table, true)
+    })
+  })
   describe('#toJson', () => {
     it('should render "w:sectPr" normally if no paragraphs are added', () => {
       let s = new jsdocx.Section()

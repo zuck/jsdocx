@@ -75,6 +75,13 @@ describe('#Document', () => {
       assert.equal(p instanceof jsdocx.Paragraph, true)
     })
   })
+  describe('#addTable', () => {
+    it('should add a valid table', () => {
+      let doc = new jsdocx.Document()
+      let t = doc.addTable()
+      assert.equal(t instanceof jsdocx.Table, true)
+    })
+  })
   describe('#addSection', () => {
     it('should add a valid section', () => {
       let doc = new jsdocx.Document()
