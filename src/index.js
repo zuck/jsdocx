@@ -4,6 +4,7 @@ import RunFormat from './RunFormat'
 import Run from './Run'
 import ParagraphFormat from './ParagraphFormat'
 import Paragraph from './Paragraph'
+import TableFormat from './TableFormat'
 import Table from './Table'
 import Section from './Section'
 import File from './File'
@@ -16,6 +17,7 @@ export default {
   Run,
   ParagraphFormat,
   Paragraph,
+  TableFormat,
   Table,
   Section,
   File,

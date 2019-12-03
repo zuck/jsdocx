@@ -14,8 +14,8 @@ export default class extends Element {
   }
 
   finalize (contents) {
-    if (this.format) contents.unshift(this.format)
     if (this.header) contents.unshift(this.header)
+    if (this.format) contents.unshift(this.format)
   }
 
   addFormat () {
