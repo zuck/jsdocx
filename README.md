@@ -39,6 +39,7 @@ doc.generate().then((content) => {
 
 ## Reference
 
+- http://officeopenxml.com/anatomyofOOXML.php
 - https://gist.github.com/felipeochoa/81d8fa27901e8222c6ffbeb165a85acc
 
 ## License
