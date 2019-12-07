@@ -56,5 +56,10 @@ describe('#Table', () => {
       t.addRow()
       assert.equal(t.toXml(), '<w:tbl><w:tr><w:tc></w:tc></w:tr><w:tr></w:tr></w:tbl>')
     })
+    it('should render cell with format correctly', () => {
+      let t = new jsdocx.Table()
+      t.addRow().addCell().addFormat()
+      assert.equal(t.toXml(), '<w:tbl><w:tr><w:tc><w:tcPr></w:tcPr></w:tc></w:tr></w:tbl>')
+    })
   })
 })
