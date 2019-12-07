@@ -19,8 +19,8 @@ describe('#TableFormat', () => {
   describe('#toXml', () => {
     it('should render borders correctly', () => {
       let fmt = new jsdocx.TableFormat()
-      fmt.addBorders().setTop('single', 12)
-      assert.equal(fmt.toXml(), '<w:tblPr><w:tblBorders><w:top w:val="single" w:sz="12" w:space="0" w:color="000000" w:shadow="false"/></w:tblBorders></w:tblPr>')
+      fmt.addBorders().setStart('single', 12)
+      assert.equal(fmt.toXml(), '<w:tblPr><w:tblBorders><w:start w:val="single" w:sz="12" w:space="0" w:color="000000" w:shadow="false"/></w:tblBorders></w:tblPr>')
     })
   })
 })

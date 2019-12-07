@@ -37,7 +37,7 @@ export default class extends Element {
 
   setStart(style, size, space, color, shadow) {
     const border = createBorder(style, size, space, color, shadow)
-    this.strat = new Element({ 'w:start': border }, '["w:start"]')
+    this.start = new Element({ 'w:start': border }, '["w:start"]')
   }
 
   setEnd(style, size, space, color, shadow) {
