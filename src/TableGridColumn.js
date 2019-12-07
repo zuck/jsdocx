@@ -7,9 +7,16 @@ export default class extends Element {
     super({ 'w:gridCol': {} }, '["w:gridCol"]')
   }
 
-  addParagraph () {
-    let p = new Paragraph()
-    this.contents.push(p)
-    return p
+  setWidth (value) {
+    if (value) {
+      this.src['w:gridCol']['@w:w'] = value
+    }
+    else {
+      delete this.src['w:gridCol']['@w:w']
+    }
+  }
+
+  getWidth () {
+    return this.src['w:gridCol']['@w:w'] || null
   }
 }
