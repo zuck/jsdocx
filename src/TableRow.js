@@ -1,5 +1,5 @@
 import Element from './Element'
-import TableColumn from './TableColumn'
+import TableCell from './TableCell'
 
 export default class extends Element {
   constructor(
@@ -7,9 +7,9 @@ export default class extends Element {
     super({ 'w:tr': {} }, '["w:tr"]')
   }
 
-  addColumn () {
-    let col = new TableColumn()
-    this.contents.push(col)
-    return col
+  addCell () {
+    let cell = new TableCell()
+    this.contents.push(cell)
+    return cell
   }
 }

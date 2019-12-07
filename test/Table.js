@@ -52,7 +52,7 @@ describe('#Table', () => {
     })
     it('should render rows correctly', () => {
       let t = new jsdocx.Table()
-      t.addRow().addColumn()
+      t.addRow().addCell()
       t.addRow()
       assert.equal(t.toXml(), '<w:tbl><w:tr><w:tc></w:tc></w:tr><w:tr></w:tr></w:tbl>')
     })
