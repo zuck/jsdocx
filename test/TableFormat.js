@@ -16,4 +16,11 @@ describe('#TableFormat', () => {
       })
     })
   })
+  describe('#toXml', () => {
+    it('should render borders correctly', () => {
+      let fmt = new jsdocx.TableFormat()
+      fmt.addBorders()
+      assert.equal(fmt.toXml(), '<w:tblPr><w:tblBorders></w:tblBorders></w:tblPr>')
+    })
+  })
 })
