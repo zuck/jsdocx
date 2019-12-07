@@ -40,12 +40,12 @@ describe('#Table', () => {
   describe('#toXml', () => {
     it('should render simple subtree correctly', () => {
       let t = new jsdocx.Table()
-      t.addHeader().addColumn()
+      t.addGrid().addColumn()
       assert.equal(t.toXml(), '<w:tbl><w:tblGrid><w:gridCol></w:gridCol></w:tblGrid></w:tbl>')
     })
     it('should render with format', () => {
       let t = new jsdocx.Table()
-      t.addHeader()
+      t.addGrid()
       // Format will be injected before any other content.
       t.addFormat()
       assert.equal(t.toXml(), '<w:tbl><w:tblPr></w:tblPr><w:tblGrid></w:tblGrid></w:tbl>')

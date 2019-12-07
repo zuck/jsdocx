@@ -1,5 +1,5 @@
 import Element from './Element'
-import TableHeaderColumn from './TableHeaderColumn'
+import TableGridColumn from './TableGridColumn'
 
 export default class extends Element {
   constructor(
@@ -8,7 +8,7 @@ export default class extends Element {
   }
 
   addColumn () {
-    let col = new TableHeaderColumn()
+    let col = new TableGridColumn()
     this.contents.push(col)
     return col
   }

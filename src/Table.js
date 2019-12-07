@@ -1,20 +1,20 @@
 import Element from './Element'
 import TableFormat from './TableFormat'
-import TableHeader from './TableHeader'
+import TableGrid from './TableGrid'
 import TableRow from './TableRow'
 
 export default class extends Element {
   constructor (
     format,
-    header
+    grid
   ) {
     super({ 'w:tbl': {} }, '["w:tbl"]')
     this.setFormat(format || null)
-    this.setHeader(header || null)
+    this.setGrid(grid || null)
   }
 
   finalize (contents) {
-    if (this.header) contents.unshift(this.header)
+    if (this.grid) contents.unshift(this.grid)
     if (this.format) contents.unshift(this.format)
   }
 
@@ -35,21 +35,21 @@ export default class extends Element {
     return this.format
   }
 
-  addHeader () {
-    let header = new TableHeader()
-    this.setHeader(header)
-    return header
+  addGrid () {
+    let grid = new TableGrid()
+    this.setGrid(grid)
+    return grid
   }
 
-  setHeader (value) {
-    if (!(value instanceof TableHeader || value === null)) {
-      throw TypeError('Invalid Table.header')
+  setGrid (value) {
+    if (!(value instanceof TableGrid || value === null)) {
+      throw TypeError('Invalid Table.grid')
     }
-    this.header = value
+    this.grid = value
   }
 
-  getHeader () {
-    return this.header
+  getGrid () {
+    return this.grid
   }
 
   addRow () {
