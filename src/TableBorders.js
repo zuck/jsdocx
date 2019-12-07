@@ -2,11 +2,11 @@ import Element from './Element'
 
 function createBorder(style, size, space, color, shadow) {
   return {
-    '@w:val': str(style) || 'single',
-    '@w:sz': str(size) || '0',
-    '@w:space': str(space) || '0',
-    '@w:color': str(color) || '000000',
-    '@w:shadow': shadow
+    '@w:val': style ? `${style}` : 'single',
+    '@w:sz': size ? `${size}` : '0',
+    '@w:space': space ? `${space}` : '0',
+    '@w:color': color ? `${color}` : '000000',
+    '@w:shadow': shadow ? 'true' : 'false'
   }
 }
 
