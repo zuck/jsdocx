@@ -9,7 +9,7 @@
     "dev": "webpack --mode=development --watch",
     "test": "mocha --require @babel/register --colors ./test/*.js",
     "lint": "eslint ./src --ext .js",
-    "prepublishOnly": "npm run test"
+    "prepublishOnly": "npm run build && npm run test"
   },
   "repository": {
     "type": "git",
