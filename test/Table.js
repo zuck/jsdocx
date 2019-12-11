@@ -1,4 +1,4 @@
-import assert from 'assert'
+import { assert } from 'chai'
 import jsdocx from '../dist/jsdocx'
 
 describe('#Table', () => {
