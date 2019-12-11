@@ -7,9 +7,9 @@
   "scripts": {
     "build": "webpack --mode=production --progress",
     "dev": "webpack --mode=development --watch",
-    "test": "mocha --require @babel/register --colors ./test/*.js",
+    "test": "npm run build && mocha --require @babel/register --colors ./test/*.js",
     "lint": "eslint ./src --ext .js",
-    "prepublishOnly": "npm run build && npm run test"
+    "prepublishOnly": "npm run test"
   },
   "repository": {
     "type": "git",
