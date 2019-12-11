@@ -120,11 +120,8 @@ export default class {
   }
 
   generate (type) {
-    if (!type || typeof type === 'undefined') {
-      type = 'blob'
-    }
     return this.toZip().generateAsync({
-      type: 'blob',
+      type: type || (typeof window === 'undefined') ? 'nodebuffer' : 'blob',
       mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     })
   }
