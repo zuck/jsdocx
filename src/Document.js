@@ -6,6 +6,7 @@ import Section from './Section'
 
 export default class {
   constructor() {
+    this.mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     this.files = {
       '_rels/.rels': new File({
         "Relationships": {
@@ -122,7 +123,7 @@ export default class {
   generate (type) {
     return this.toZip().generateAsync({
       type: type || (typeof window === 'undefined') ? 'nodebuffer' : 'blob',
-      mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      mimeType: this.mimeType
     })
   }
 }

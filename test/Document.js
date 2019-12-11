@@ -2,6 +2,13 @@ import { assert } from 'chai'
 import jsdocx from '../dist/jsdocx'
 
 describe('#Document', () => {
+  describe('#mimeType', () => {
+    it('should exist after creation', () => {
+      let doc = new jsdocx.Document()
+      assert.equal(doc.hasOwnProperty('mimeType'), true)
+      assert.equal(typeof doc.mimeType, 'string')
+    })
+  })
   describe('#files', () => {
     it('should exist after creation', () => {
       let doc = new jsdocx.Document()
