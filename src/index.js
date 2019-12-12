@@ -9,8 +9,9 @@ import Table from './Table'
 import Section from './Section'
 import File from './File'
 import Document from './Document'
+import { version } from '../package.json'
 
-export default {
+const jsdocx = {
   Element,
   Text,
   RunFormat,
@@ -21,5 +22,8 @@ export default {
   Table,
   Section,
   File,
-  Document
+  Document,
+  version
 }
+
+export default jsdocx
