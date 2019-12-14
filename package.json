@@ -5,7 +5,7 @@
   "main": "dist/jsdocx.js",
   "module": "src/index.js",
   "scripts": {
-    "build": "webpack --mode=production --progress",
+    "build": "webpack --mode=production --progress && cp dist/jsdocx.js docs/",
     "dev": "webpack --mode=development --watch",
     "test": "npm run build && mocha --require @babel/register --colors ./test/*.js",
     "lint": "eslint ./src --ext .js",

@@ -1,0 +1,199 @@
+<DOCTYPE html>
+  <html>
+
+  <head>
+    <title>jsdocx | Demo</title>
+    <meta charset='utf-8' />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
+    <script src="jsdocx.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="container mx-auto pb-16">
+        <header class="text-center my-6">
+          <a class="inline-block mx-auto mb-4" href="https://github.com/zuck/jsdocx">
+            <img src="https://cdn.rawgit.com/zuck/jsdocx/b70fc554/jsdocx.svg" />
+          </a>
+          <h1 class="text-3xl"><span class="">jsdocx</span> v{{ version }}</h1>
+          <h2 class="text-xl text-gray-500">Generate .docx files from JS</h2>
+        </header>
+        <div class="rounded shadow-lg my-4 sm:mx-4 md:mx-auto md:w-1/2">
+          <div class="p-6">
+            <div class="font-bold text-xl mb-4">Minimal</div>
+            <pre class="rounded p-6 bg-gray-900 text-white text-base mb-4 overflow-auto">
+var doc = new jsdocx.Document()
+
+doc.generate().then((content) => {
+  saveAs(content, filename)
+})
+            </pre>
+            <button class="bg-yellow-500 hover:bg-gray-900 text-black hover:text-yellow-500 font-bold py-2 px-4 rounded"
+              v-on:click="generateEmptyDocx">Generate</button>
+          </div>
+        </div>
+
+        <div class="rounded shadow-lg my-4 sm:mx-4 md:mx-auto md:w-1/2">
+          <div class="p-6">
+            <div class="font-bold text-xl mb-4">Plain text</div>
+            <pre class="rounded p-6 bg-gray-900 text-white text-base mb-4 overflow-auto">
+var doc = new jsdocx.Document()
+
+doc.addParagraph().addRun().addText('Hello World!')
+
+doc.generate().then((content) => {
+  saveAs(content, filename)
+})
+            </pre>
+            <textarea
+              class="mb-4 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
+              v-model="simpleText"
+            ></textarea>
+            <button class="bg-yellow-500 hover:bg-gray-900 text-black hover:text-yellow-500 font-bold py-2 px-4 rounded"
+              v-on:click="generateSimpleDocx">Generate</button>
+          </div>
+        </div>
+
+        <div class="rounded shadow-lg my-4 sm:mx-4 md:mx-auto md:w-1/2">
+          <div class="p-6">
+            <div class="font-bold text-xl mb-4">Paragraph format</div>
+            <pre class="rounded p-6 bg-gray-900 text-white text-base mb-4 overflow-auto">
+var doc = new jsdocx.Document()
+
+var p = doc.addParagraph()
+p.addFormat().addHAlignment().setVal('center')
+p.addRun().addText('...')
+
+doc.generate().then((content) => {
+  saveAs(content, filename)
+})
+            </pre>
+            <textarea
+              class="mb-4 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
+              v-model="paragraphFormattedText"
+            ></textarea>
+            <p class="mb-4">
+              <input class="mr-1 cursor-pointer" type="radio" value="left" v-model="hAlignment">
+              <label class="mr-4 align-top">Left</label>
+              <input class="mr-1 cursor-pointer" type="radio" value="center" v-model="hAlignment">
+              <label class="mr-4 align-top">Center</label>
+              <input class="mr-1 cursor-pointer" type="radio" value="right" v-model="hAlignment">
+              <label class="mr-4 align-top">Right</label>
+              <input class="mr-1 cursor-pointer" type="radio" value="both" v-model="hAlignment">
+              <label class="mr-4 align-top">Justify</label>
+            </p>
+            <button class="bg-yellow-500 hover:bg-gray-900 text-black hover:text-yellow-500 font-bold py-2 px-4 rounded"
+              v-on:click="generateDocxWithFormattedParagraph">Generate</button>
+          </div>
+        </div>
+
+        <div class="rounded shadow-lg my-4 sm:mx-4 md:mx-auto md:w-1/2">
+          <div class="p-6">
+            <div class="font-bold text-xl mb-4">Run/Text format</div>
+            <pre class="rounded p-6 bg-gray-900 text-white text-base mb-4 overflow-auto">
+var doc = new jsdocx.Document()
+
+var r = doc.addParagraph().addRun()
+r.addFormat().addBold()
+r.addText('...')
+
+doc.generate().then((content) => {
+  saveAs(content, filename)
+})
+            </pre>
+            <textarea
+              class="mb-4 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
+              v-model="runFormattedText"
+            ></textarea>
+            <p class="mb-4">
+              <input class="mr-1 cursor-pointer" type="checkbox" v-model="bold">
+              <label class="mr-4 align-top">Bold</label>
+              <input class="mr-1 cursor-pointer" type="checkbox" v-model="italic">
+              <label class="mr-4 align-top">Italic</label>
+            </p>
+            <button class="bg-yellow-500 hover:bg-gray-900 text-black hover:text-yellow-500 font-bold py-2 px-4 rounded"
+              v-on:click="generateDocxWithFormattedText">Generate</button>
+          </div>
+        </div>
+
+        <div class="rounded shadow-lg my-4 sm:mx-4 md:mx-auto md:w-1/2">
+          <div class="p-6">
+            <div class="font-bold text-xl mb-4">Columns</div>
+            <pre class="rounded p-6 bg-gray-900 text-white text-base mb-4 overflow-auto">
+var doc = new jsdocx.Document()
+
+doc.addCols().setNum(2)
+doc.addParagraph().addRun().addText('...')
+
+// You can also generate a custom section instead:
+//
+// var s = doc.addSection()
+// s.addCols().setNum(2)
+// s.addParagraph().addRun().addText('...')
+
+doc.generate().then((content) => {
+  saveAs(content, filename)
+})
+            </pre>
+            <textarea
+              class="h-64 mb-4 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500"
+              v-model="columnText"
+            ></textarea>
+            <p class="mb-4">
+              <label>Number of columns</label>
+              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500" type="number" v-model="numColumns">
+            </p>
+            <button class="bg-yellow-500 hover:bg-gray-900 text-black hover:text-yellow-500 font-bold py-2 px-4 rounded"
+              v-on:click="generateDocxWithColumns">Generate</button>
+          </div>
+        </div>
+
+
+        <div class="rounded shadow-lg my-4 sm:mx-4 md:mx-auto md:w-1/2">
+          <div class="p-6">
+            <div class="font-bold text-xl mb-4">Tables</div>
+            <pre class="rounded p-6 bg-gray-900 text-white text-base mb-4 overflow-auto">
+var doc = new jsdocx.Document()
+
+var t = doc.addTable()
+t.addFormat().addBorders().setAll(1)
+t.addRow().addCell()
+
+doc.generate().then((content) => {
+  saveAs(content, filename)
+})
+            </pre>
+            <p class="mb-4">
+              <label>Number of rows</label>
+              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500" type="number" v-model="numTableRows">
+            </p>
+            <p class="mb-4">
+              <label>Number of columns</label>
+              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-yellow-500" type="number" v-model="numTableCols">
+            </p>
+            <p class="mb-4">
+              <input class="mr-1 cursor-pointer" type="checkbox" v-model="showTableBorders">
+              <label class="mr-4 align-top">Show borders</label>
+            </p>
+            <button class="bg-yellow-500 hover:bg-gray-900 text-black hover:text-yellow-500 font-bold py-2 px-4 rounded"
+              v-on:click="generateDocxWithTable">Generate</button>
+          </div>
+        </div>
+
+        <div class="text-center my-16">
+          <a class="inline-block mb-4" href="https://github.com/zuck/jsdocx">
+            <img class="inline w-24" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Fork on GitHub"/>
+          </a>
+          <p class="text-gray-500">
+            Copyright (C) 2019 Emanuele Bertoldi
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+
+</html>
