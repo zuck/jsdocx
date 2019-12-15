@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import jsdocx from '../dist/jsdocx'
+import * as jsdocx from '../dist/jsdocx'
 
 describe('#ES6', () => {
   describe('#import', () => {

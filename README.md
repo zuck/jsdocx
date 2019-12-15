@@ -26,7 +26,7 @@ $ npm run build
 ## How to use
 
 ```js
-import jsdocx from 'jsdocx'
+import * as jsdocx from 'jsdocx'
 
 let doc = new jsdocx.Document()
 let p = doc.addParagraph()

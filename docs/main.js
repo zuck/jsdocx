@@ -1,12 +1,10 @@
 'use strict'
 
-const $jsdocx = jsdocx.default
-
 const app = new Vue({
   el: '#app',
   data () {
     return {
-      version: $jsdocx.version,
+      version: jsdocx.version,
 
       simpleText: 'Write something here...',
 
@@ -27,7 +25,7 @@ const app = new Vue({
   },
   methods: {
     generateEmptyDocx() {
-      var doc = new $jsdocx.Document()
+      var doc = new jsdocx.Document()
       var p = doc.addParagraph()
       p.addRun().addText('Hello World!')
       doc.generate().then(function(content) {
@@ -35,7 +33,7 @@ const app = new Vue({
       })
     },
     generateHelloDocx() {
-      var doc = new $jsdocx.Document()
+      var doc = new jsdocx.Document()
       var p = doc.addParagraph()
       p.addRun().addText('Hello World!')
       doc.generate().then(function(content) {
@@ -43,7 +41,7 @@ const app = new Vue({
       })
     },
     generateSimpleDocx() {
-      var doc = new $jsdocx.Document()
+      var doc = new jsdocx.Document()
       this.simpleText.split('\n').forEach((line) => {
         doc.addParagraph().addRun().addText(line)
       })
@@ -52,7 +50,7 @@ const app = new Vue({
       })
     },
     generateDocxWithFormattedParagraph() {
-      var doc = new $jsdocx.Document()
+      var doc = new jsdocx.Document()
       this.paragraphFormattedText.split('\n').forEach((line) => {
         var p = doc.addParagraph()
         p.addRun().addText(line)
@@ -63,7 +61,7 @@ const app = new Vue({
       })
     },
     generateDocxWithFormattedText() {
-      var doc = new $jsdocx.Document()
+      var doc = new jsdocx.Document()
       this.runFormattedText.split('\n').forEach((line) => {
         var r = doc.addParagraph().addRun()
         r.addText(line)
@@ -76,7 +74,7 @@ const app = new Vue({
       })
     },
     generateDocxWithColumns() {
-      var doc = new $jsdocx.Document()
+      var doc = new jsdocx.Document()
       doc.addCols().setNum(this.numColumns)
       this.columnText.split('\n').forEach((line) => {
         doc.addParagraph().addRun().addText(line)
@@ -86,7 +84,7 @@ const app = new Vue({
       })
     },
     generateDocxWithTable() {
-      var doc = new $jsdocx.Document()
+      var doc = new jsdocx.Document()
       var t = doc.addTable()
       var b = t.addFormat().addBorders()
       if (this.showTableBorders) {

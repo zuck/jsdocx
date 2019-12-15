@@ -11,7 +11,7 @@ import File from './File'
 import Document from './Document'
 import { version } from '../package.json'
 
-const jsdocx = {
+export {
   Element,
   Text,
   RunFormat,
@@ -25,5 +25,3 @@ const jsdocx = {
   Document,
   version
 }
-
-export default jsdocx

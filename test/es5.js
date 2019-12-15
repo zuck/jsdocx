@@ -1,5 +1,5 @@
 var assert = require('chai').assert
-var jsdocx = require('../dist/jsdocx').default
+var jsdocx = require('../dist/jsdocx')
 
 describe('#ES5', () => {
   describe('#require', () => {
