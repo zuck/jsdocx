@@ -61,5 +61,20 @@ describe('#Table', () => {
       t.addRow().addCell().addFormat()
       assert.equal(t.toXml(), '<w:tbl><w:tr><w:tc><w:tcPr></w:tcPr></w:tc></w:tr></w:tbl>')
     })
+    it('should render cell width correctly', () => {
+      let fmt = new jsdocx.Table().addRow().addCell().addFormat()
+      fmt.setWidth('33.3%', 'pct')
+      assert.equal(fmt.toXml(), '<w:tcPr><w:tcW w:type="pct" w:w="33.3%"/></w:tcPr>')
+    })
+    it('should render cell horizontal span correctly', () => {
+      let fmt = new jsdocx.Table().addRow().addCell().addFormat()
+      fmt.setHSpan(3)
+      assert.equal(fmt.toXml(), '<w:tcPr><w:gridSpan w:val="3"/></w:tcPr>')
+    })
+    it('should render cell vertical alignment correctly', () => {
+      let fmt = new jsdocx.Table().addRow().addCell().addFormat()
+      fmt.setVAlign('bottom')
+      assert.equal(fmt.toXml(), '<w:tcPr><w:vAlign w:val="bottom"/></w:tcPr>')
+    })
   })
 })
