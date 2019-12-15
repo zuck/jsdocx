@@ -10,8 +10,14 @@ https://zuck.github.io/jsdocx-demo/
 
 ## Install
 
+**Node**
 ```bash
 $ npm install jsdocx
+```
+
+**Browser**
+```bash
+<script src="https://unpkg.com/jsdocx"></script>
 ```
 
 ## Build
@@ -23,10 +29,18 @@ $ npm install
 $ npm run build
 ```
 
+## Test
+
+```bash
+$ npm test
+```
+
 ## How to use
 
 ```js
 import * as jsdocx from 'jsdocx'
+
+// ES5: var jsdocx = require('jsdocx')
 
 let doc = new jsdocx.Document()
 let p = doc.addParagraph()
