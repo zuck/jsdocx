@@ -6,7 +6,7 @@
 
 ## Demo
 
-https://zuck.github.io/jsdocx-demo/
+https://zuck.github.io/jsdocx
 
 ## Install
 
@@ -16,7 +16,7 @@ $ npm install jsdocx
 ```
 
 **Browser**
-```bash
+```html
 <script src="https://unpkg.com/jsdocx"></script>
 ```
 
@@ -58,8 +58,6 @@ doc.generate().then((content) => {
 
 ## License
 
-The MIT License (MIT)
+The [MIT License](./LICENSE) (MIT)
 
-[Read more...](./LICENSE)
-
-Copyright (c) 2017 Emanuele Bertoldi
+Copyright (c) Emanuele Bertoldi
