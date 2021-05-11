@@ -4,6 +4,8 @@
 
 > Generate .docx files from JS
 
+[![Node.js CI](https://github.com/zuck/jsdocx/actions/workflows/node.js.yml/badge.svg)](https://github.com/zuck/jsdocx/actions/workflows/node.js.yml)
+
 ## Demo
 
 https://zuck.github.io/jsdocx
