@@ -41,7 +41,7 @@
     "chai": "^4.2.0",
     "eslint": "^4.18.2",
     "eslint-loader": "1.7.1",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   }
